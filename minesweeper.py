@@ -249,7 +249,6 @@ class MinesweeperAI():
 
         # Add any new sentences to the AI's knowledge base
         new_knowledges: List[Sentence] = list()
-        dep = 0
 
         for i, s1 in enumerate(self.knowledge):
             s1_len = len(s1.cells)
@@ -260,14 +259,11 @@ class MinesweeperAI():
                 s2_len = len(s2.cells)
                 if s2_len == 0:
                     continue
-                dep += 1
-
                 if s1_len > s2_len and s2.cells.issubset(s1.cells):
                     new_knowledges.append(Sentence(s1.cells.difference(s2.cells), s1.count - s2.count))   
                 elif s2_len > s1_len and s1.cells.issubset(s2.cells):
                     new_knowledges.append(Sentence(s2.cells.difference(s1.cells), s2.count - s1.count))
         
-        print(dep)
         self.knowledge.extend(new_knowledges)
 
 
